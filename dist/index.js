@@ -29,10 +29,9 @@ async function run() {
     core.info(`prHasComment: ${prHasComment} `);
     core.info(`comment Url: ${context.payload.comment.url} `);
     core.info(`Author user Id: ${context.payload.comment.user.id}`);
-    core.info(`Author user Login: ${context.payload.comment.user.id}`);
+    core.info(`Author user Login: ${context.payload.comment.user.login}`);
 
-    core.info(`Pull Request Id : ${context.payload.issue.pull_request.number}`);
-    core.info(`Pull Request Author Login : ${context.payload.issue.pull_request.user.login}`);
+    core.info(`Pull Request  : ${context.payload.issue.pull_request}`);
     
 
 
