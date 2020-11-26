@@ -50,10 +50,10 @@ async function run() {
     core.info(`github.repository_owner  : ${github.repository_owner}`);
     core.info(`github.event.repository.name  : ${github.event.repository.name}`);
 
-
+    const simple_repo_name = repo_name.split('/')[1];
     const { data: pullRequest } = await octokit.pulls.get({
       owner: repo_owner,
-      repo: repo_name,
+      repo: simple_repo_name,
       pull_number: pullRequestId
   });
 
