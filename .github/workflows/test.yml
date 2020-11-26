@@ -1,10 +1,14 @@
 name: "units-test"
 on:
-  pull_request:
-  push:
-    branches:
-      - main
-      - 'releases/*'
+  on:
+    pull_request_target:
+     branches: [ main ]
+     types: [opened]
+    pull_request:
+     branches: [ main ]
+     types: [opened]   
+    issue_comment:
+      types: [created]
 
 jobs:
   # unit tests
