@@ -36,14 +36,21 @@ async function run() {
     core.info(`Pull Request author Login  : ${context.payload.issue.user.login}`);
 
     const octokit = github.getOctokit(GITHUB_TOKEN);
-    
+
     const username = context.payload.comment.user.login;
+    const pullRequestId = context.payload.issue.number;
 
-    const { data: user } = await octokit.users.getByUsername({
-      username,
-    });
+    core.info(`github.repository_owner  : ${github.repository_owner}`);
+    core.info(`github.event.repository.name  : ${github.event.repository.name}`);
 
-    core.info(`Author user email: ${user.email}`);
+
+    const { data: pullRequest } = await octokit.pulls.get({
+      owner: github.repository_owner,
+      repo: github.event.repository.name,
+      pull_number: pullRequestId
+  });
+
+    core.info(`Author user email: ${user}`);
 
 
     // get pull request 
