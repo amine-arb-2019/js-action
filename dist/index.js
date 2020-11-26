@@ -19,7 +19,7 @@ async function run() {
 
     if (context.eventName === "issue_comment" && context.payload.issue.pull_request) { // a comment on pull request
       const body = context.payload.comment.body;
-      stringList.forEach(function (item) {
+      stringList.split(',').forEach(function (item) {
         if (body.startWith(item) || !body.includes(item)) {
             prHasComment = true;
         }
