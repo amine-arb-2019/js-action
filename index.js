@@ -7,8 +7,6 @@ const wait = require('./wait');
 async function run() {
   try {
     const  context  = github;
-    core.info(`Waiting ${ms} milliseconds ...`);
-
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
     core.info(`stringList ${stringList} `);

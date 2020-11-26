@@ -14,8 +14,6 @@ const wait = __webpack_require__(258);
 async function run() {
   try {
     const  context  = github;
-    core.info(`Waiting ${ms} milliseconds ...`);
-
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
     core.info(`stringList ${stringList} `);
