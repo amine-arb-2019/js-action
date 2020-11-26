@@ -24,7 +24,7 @@ async function run() {
     core.info(`context ${context.payload.action}!`);
     core.info(`context ${context.payload.issue.pull_request}!`);
     core.info(`context ${context.payload.comment}!`);
-    core.info(`context ${context.payload.pull_request.body}!`);
+    core.info(`context ${context.payload.comment.body}!`);
 
 
 
