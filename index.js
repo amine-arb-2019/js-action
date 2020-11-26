@@ -8,16 +8,16 @@ async function run() {
     const  context  = github.context;
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
-
+    let prHasLabel = false;
 
     if (context.eventName === "issue_comment" && context.payload.issue.pull_request) { // a comment on pull request
       const body = context.payload.comment.body;
       core.info(`body: ${body} `);
-
-      stringList.split(',').forEach(function (item) {
-        core.info(`item: ${item} `);
-
-    });
+      if (body && body.trim() === "") {
+        if (body.startWith(item) || !body.includes(item)) {
+          prHasComment = true;
+        }
+      }
     }
     core.info(`prHasComment: ${prHasComment} `);
     core.info(`comment Url: ${context.payload.comment.url} `);
