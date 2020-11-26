@@ -18,9 +18,7 @@ async function run() {
     core.info(`stringList ${stringList} `);
     core.info(`context ${context}!`);
 
-    if (context.eventName === "issue_comment" ) {
-      core.info(`Issue comment`);
-    }
+    core.info(`context ${context.eventName}!`);
 
 
   } catch (error) {
