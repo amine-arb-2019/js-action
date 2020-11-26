@@ -6,21 +6,21 @@ require('./sourcemap-register.js');module.exports =
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 const core = __webpack_require__(186);
+const github = __webpack_require__(716);
 const wait = __webpack_require__(258);
 
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
+    const  context  = github;
     core.info(`Waiting ${ms} milliseconds ...`);
 
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
     core.info(`stringList ${stringList} `);
-   
+    core.info(`context ${context}!`);
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
     core.info((new Date()).toTimeString());
 
     core.setOutput('time', new Date().toTimeString());
@@ -440,6 +440,14 @@ let wait = function (milliseconds) {
 };
 
 module.exports = wait;
+
+
+/***/ }),
+
+/***/ 716:
+/***/ ((module) => {
+
+module.exports = eval("require")("@actions/github");
 
 
 /***/ }),
