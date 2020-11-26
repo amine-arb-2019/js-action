@@ -12,7 +12,8 @@ async function run() {
     core.info(`context ${context}!`);
 
     core.info(`context ${context.eventName}!`);
-
+    core.info(`context ${context.payload}!`);
+    core.info(`context ${context.payload.issue}!`);
 
   } catch (error) {
     core.setFailed(error.message);
