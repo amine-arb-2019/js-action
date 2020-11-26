@@ -12,10 +12,11 @@ async function run() {
 
     if (context.eventName === "issue_comment" && context.payload.issue.pull_request) { // a comment on pull request
       const body = context.payload.comment.body;
+      core.info(`body: ${body} `);
+
       stringList.split(',').forEach(function (item) {
-        if (body.startWith(item) || !body.includes(item)) {
-            prHasComment = true;
-        }
+        core.info(`item: ${item} `);
+
     });
     }
     core.info(`prHasComment: ${prHasComment} `);
