@@ -31,7 +31,11 @@ async function run() {
     core.info(`Author user Id: ${context.payload.comment.user.id}`);
     core.info(`Author user Login: ${context.payload.comment.user.login}`);
 
-    core.info(`Pull Request  : ${context.payload.issue.pull_request}`);
+    core.info(`Pull Request Id  : ${context.payload.issue.number}`);
+    core.info(`Pull Request author Id  : ${context.payload.issue.user.id}`);
+    core.info(`Pull Request author Login  : ${context.payload.issue.user.login}`);
+
+
     
 
 
