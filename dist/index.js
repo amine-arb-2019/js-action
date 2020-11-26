@@ -7,7 +7,6 @@ require('./sourcemap-register.js');module.exports =
 
 const core = __webpack_require__(186);
 const github = __webpack_require__(438);
-const wait = __webpack_require__(258);
 
 
 // most @actions toolkit packages have async methods
@@ -19,9 +18,11 @@ async function run() {
     core.info(`stringList ${stringList} `);
     core.info(`context ${context}!`);
 
-    core.info((new Date()).toTimeString());
+    if (context.eventName === "issue_comment" ) {
+      core.info(`Issue comment`);
+    }
 
-    core.setOutput('time', new Date().toTimeString());
+
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -5862,23 +5863,6 @@ function wrappy (fn, cb) {
     return ret
   }
 }
-
-
-/***/ }),
-
-/***/ 258:
-/***/ ((module) => {
-
-let wait = function (milliseconds) {
-  return new Promise((resolve) => {
-    if (typeof milliseconds !== 'number') {
-      throw new Error('milliseconds not a number');
-    }
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-};
-
-module.exports = wait;
 
 
 /***/ }),

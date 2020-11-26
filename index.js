@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const github = require("@actions/github");
-const wait = require('./wait');
 
 
 // most @actions toolkit packages have async methods
@@ -12,9 +11,11 @@ async function run() {
     core.info(`stringList ${stringList} `);
     core.info(`context ${context}!`);
 
-    core.info((new Date()).toTimeString());
+    if (context.eventName === "issue_comment" ) {
+      core.info(`Issue comment`);
+    }
 
-    core.setOutput('time', new Date().toTimeString());
+
   } catch (error) {
     core.setFailed(error.message);
   }
