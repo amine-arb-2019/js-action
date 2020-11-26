@@ -15,7 +15,7 @@ async function run() {
     const  context  = github.context;
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
-    let prHasLabel = false;
+    let prHasComment = false;
 
     if (context.eventName === "issue_comment" && context.payload.issue.pull_request) { // a comment on pull request
       const body = context.payload.comment.body;
