@@ -15,16 +15,37 @@ async function run() {
     const  context  = github.context;
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
-    core.info(`stringList ${stringList} `);
-    core.info(`context ${context}!`);
 
-    core.info(`context ${context.eventName}!`);
-    core.info(`context ${context.payload}!`);
-    core.info(`context ${context.payload.issue}!`);
-    core.info(`context ${context.payload.action}!`);
-    core.info(`context ${context.payload.issue.pull_request}!`);
-    core.info(`context ${context.payload.comment}!`);
-    core.info(`context ${context.payload.comment.body}!`);
+
+    if (context.eventName === "issue_comment" && context.payload.issue.pull_request) { // a comment on pull request
+      const body = context.payload.comment.body;
+      stringList.forEach(function (item) {
+        if (body.startWith(item) || !body.includes(item)) {
+            prHasComment = true;
+        }
+    });
+    }
+    core.info(`prHasComment: ${prHasComment} `);
+    core.info(`comment Url: ${context.payload.comment.url} `);
+    core.info(`Author user Id: ${context.payload.comment.user.id}`);
+    core.info(`Author user Login: ${context.payload.comment.user.id}`);
+
+    core.info(`Pull Request Id : ${context.payload.issue.pull_request.number}`);
+    core.info(`Pull Request Author Login : ${context.payload.issue.pull_request.user.login}`);
+    
+
+
+
+
+    // get pull request 
+    
+
+//    core.info(`Author firstName: ${prHasComment}  lastName ${prHasComment}`);
+//    core.info(`Author email: ${prHasComment}`);
+
+
+
+
 
 
 
