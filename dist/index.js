@@ -35,10 +35,15 @@ async function run() {
     core.info(`Pull Request author Id  : ${context.payload.issue.user.id}`);
     core.info(`Pull Request author Login  : ${context.payload.issue.user.login}`);
 
-
+    const octokit = github.getOctokit(GITHUB_TOKEN);
     
+    const username = context.payload.comment.user.login;
 
+    const { data: user } = await octokit.users.getByUsername({
+      username,
+    });
 
+    core.info(`Author user email: ${user.email}`);
 
 
     // get pull request 
