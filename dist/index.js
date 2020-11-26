@@ -21,6 +21,13 @@ async function run() {
     core.info(`context ${context.eventName}!`);
     core.info(`context ${context.payload}!`);
     core.info(`context ${context.payload.issue}!`);
+    core.info(`context ${context.payload.action}!`);
+    core.info(`context ${context.payload.issue.pull_request}!`);
+    core.info(`context ${context.payload.comment}!`);
+    core.info(`context ${context.payload.pull_request.body}!`);
+
+
+
 
   } catch (error) {
     core.setFailed(error.message);
