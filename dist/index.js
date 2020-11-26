@@ -12,7 +12,7 @@ const github = __webpack_require__(438);
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const  context  = github;
+    const  context  = github.context;
     const  GITHUB_TOKEN  = core.getInput("github-token");
     const stringList = core.getInput('string-list');
     core.info(`stringList ${stringList} `);
