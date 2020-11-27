@@ -37,7 +37,7 @@ async function run() {
       if (body && body.trim() != "") {
         stringList.toLowerCase().split(',').forEach(function (item) {
           core.info(`item: ${item} `);
-          if (body.toLowerCase().startWith(item) || !body.toLowerCase().includes(item)) {
+          if (body.toLowerCase().startsWith(item) || !body.toLowerCase().includes(item)) {
             prHasComment = true;
           }
         });
