@@ -1,5 +1,7 @@
 const core = require('@actions/core');
 const github = require("@actions/github");
+const axios = require('axios').default;
+
 
 
 // most @actions toolkit packages have async methods
@@ -11,7 +13,7 @@ async function run() {
     let prHasComment = false;
 
 
-    const { repo_name, repo_owner } = process.env;
+    const { repo_name, repo_owner, slack_webook, slack_channel, slack_message_template } = process.env;
     if (!repo_name || !repo_owner) {
         core.setFailed('If "reaction" is supplied, GITHUB_TOKEN is required');
         return;
@@ -35,34 +37,20 @@ async function run() {
     }
     core.info(`prHasComment: ${prHasComment} `);
     core.info(`comment Url: ${context.payload.comment.url} `);
-    core.info(`Author user Id: ${context.payload.comment.user.id}`);
-    core.info(`Author user Login: ${context.payload.comment.user.login}`);
 
-    core.info(`Pull Request Id  : ${context.payload.issue.number}`);
-    core.info(`Pull Request author Id  : ${context.payload.issue.user.id}`);
-    core.info(`Pull Request author Login  : ${context.payload.issue.user.login}`);
+   const message = slack_message_template.replace('{commentUrl}', context.payload.comment.url)
+                                         .replace('{userId}',  context.payload.comment.user.login)
+                                         .replace('{userProfile}', 'https://github.com/'+ context.payload.comment.user.login);
 
-    const octokit = github.getOctokit(GITHUB_TOKEN);
-
-    const username = context.payload.comment.user.login;
-    const pullRequestId = context.payload.issue.number;
-
-    const { data: user } = await octokit.pulls.get({
-      username,
-  });
-
-
-  core.info(`user   : ${user.email}`);
-  core.info(`user   : ${user.login}`);
-
-    
-
-//    core.info(`Author firstName: ${prHasComment}  lastName ${prHasComment}`);
-//    core.info(`Author email: ${prHasComment}`);
-
-
-
-
+    let payload = {channel: slack_channel, username: 'webhookbot', text: message}
+    axios.post(slack_webook, payload).then(
+      function (response) {
+        core.info(response);
+    })
+    .catch(function (error) {
+      core.error(error);
+      core.setFailed(error);
+    });
 
 
 
